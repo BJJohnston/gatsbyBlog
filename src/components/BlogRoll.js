@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link, graphql, StaticQuery } from 'gatsby'
+import 'bootstrap/dist/css/bootstrap.css'
 
 class BlogRoll extends React.Component {
   render() {
@@ -8,7 +9,7 @@ class BlogRoll extends React.Component {
     const { edges: posts } = data.allMarkdownRemark;
 
     return (
-      <div className="columns is-multiline">
+      <div className="col-md-8">
         {posts &&
           posts.map(({ node: post }) => (
             <div className="is-parent column is-6" key={post.id}>
@@ -17,28 +18,18 @@ class BlogRoll extends React.Component {
                   post.frontmatter.featuredpost ? 'is-featured' : ''
                 }`}
               >
-                <header>
-                  <p className="post-meta">
-                    <Link
-                      className="title has-text-primary is-size-4"
-                      to={post.frontmatter.path}
-                    >
-                      {post.frontmatter.title}
-                    </Link>
-                    <span> &bull; </span>
-                    <span className="subtitle is-size-5 is-block">
-                      {post.frontmatter.date}
-                    </span>
-                  </p>
-                </header>
-                <p>
-                  {post.excerpt}
-                  <br />
-                  <br />
-                  <Link className="button" to={post.frontmatter.path}>
-                    Keep Reading →
-                  </Link>
-                </p>
+              <div className="card mb-4">
+        <div className="card-body">
+          <h2 className="card-title">{post.frontmatter.title}</h2>
+          <p className="card-text"> {post.excerpt} 
+          <br/>
+          <br/>
+            <a href={post.frontmatter.path} className="btn btn-primary">Read More →</a>
+          </p></div>
+        <div className="card-footer text-muted">
+          Posted on {post.frontmatter.date} by <a href="#">{post.frontmatter.author}</a>
+        </div>
+      </div>
               </article>
             </div>
           ))}
@@ -70,6 +61,7 @@ export default () => (
                 path
                 title
                 date(formatString: "MMMM DD, YYYY")
+                author
               }
             }
           }

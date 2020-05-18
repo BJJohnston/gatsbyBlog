@@ -14,6 +14,7 @@ export default function Template({
           className="blog-post-content"
           dangerouslySetInnerHTML={{ __html: html }}
         />
+        <h3>{frontmatter.author}</h3>
       </div>
     </div>
   )
@@ -26,6 +27,7 @@ export const pageQuery = graphql`
         date(formatString: "MMMM DD, YYYY")
         path
         title
+        author
       }
     }
   }
