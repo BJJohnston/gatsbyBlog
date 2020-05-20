@@ -1,6 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
 import Nav from '../components/Nav'
+import 'bootstrap/dist/css/bootstrap.css'
 export default function Template({
   data, // this prop will be injected by the GraphQL query below.
 }) {
